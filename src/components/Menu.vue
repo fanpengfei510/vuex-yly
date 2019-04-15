@@ -1,0 +1,157 @@
+<template>
+  <div class="menu">
+    <el-header height="80">
+      <div class="header-logo">
+        <img src="../assets/nimage001.png" height="55">
+        <div class="base-options">
+          <i class="el-icon-bell"></i>
+          <i class="el-icon-message"></i>
+          <router-link to="/setting">
+            <i class="el-icon-setting"></i>
+          </router-link>
+        </div>
+      </div>
+      <div class="header-menu">
+        <div class="app-toggle" @click="handleAppDialog">
+          <i class="el-icon-menu" style="margin-right:5px;"></i>
+          {{objApp.title}}
+        </div>
+        <ul class="header-menu-list">
+          <router-link to="/home">
+            <li>首页</li>
+          </router-link>
+          <router-link :to="item.href" v-for="item in objApp.children" :key="item.id">
+            <li>{{item.label}}</li>
+          </router-link>
+        </ul>
+      </div>
+    </el-header>
+
+    <el-dialog title="应用选择" :visible.sync="bolAppDialog">
+      <el-row :gutter="12">
+        <el-col :span="8" v-for="item in arrMenu" :key="item._id">
+          <el-card shadow="hover">
+            <a href="javascript:void(0)" @click="handleAppClick(item)">{{item.title}}</a>
+          </el-card>
+        </el-col>
+      </el-row>
+    </el-dialog>
+  </div>
+</template>
+
+<script>
+export default {
+  name: "Menu",
+  data() {
+    return {
+      arrMenu: [
+        {
+          title: "项目中心",
+          _id: 1,
+          children: [
+            {
+              label: "我的消息",
+              href: "/info",
+              id: "1"
+            },
+            {
+              label: "我的项目",
+              href: "/project/my",
+              id: "2"
+            },
+            {
+              label: "我的任务",
+              href: "/project/task",
+              id: "3"
+            },
+            {
+              label: "我的审批",
+              href: "/project/approve",
+              id: "4"
+            },
+            {
+              label: "项目动态",
+              href: "/project/news",
+              id: "5"
+            },
+            {
+              label: "项目文件",
+              href: "/project/file",
+              id: "6"
+            }
+          ]
+        },
+        { title: "行政案例", _id: 2 }
+      ],
+      objApp: {},
+      bolAppDialog: false
+    };
+  },
+  methods: {
+    handleAppDialog() {
+      this.bolAppDialog = true;
+    },
+    handleAppClick(result) {
+      this.$router.push("/home");
+      this.objApp = result;
+      this.bolAppDialog = false;
+    }
+  },
+  created() {
+    this.objApp = this.arrMenu[0]
+  }
+};
+</script>
+
+<style lang="css">
+.menu .el-header {
+  border-bottom: 1px solid #eeeeee;
+  background: #ffffff;
+}
+.menu .header-logo {
+  height: 60px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.menu .header-menu {
+  display: flex;
+  line-height: 40px;
+}
+.menu .header-menu .app-toggle {
+  width: 200px;
+  cursor: pointer;
+  font-size: 16px;
+}
+.menu .header-menu-list li {
+  padding: 0 15px;
+  margin: 0 5px;
+  color: #666666;
+  border-top: 2px solid #ffffff;
+  cursor: pointer;
+  display: inline-block;
+  border-left: 1px solid #ffffff;
+  border-right: 1px solid #ffffff;
+  transition: all 0.2s;
+  position: relative;
+  top: 1px;
+}
+.menu .header-menu-list li:hover {
+  border-top: 2px solid #409eff;
+  border-left: 1px solid #eeeeee;
+  border-right: 1px solid #eeeeee;
+  background: #f5f5f5;
+  color: #409EFF;
+  position: relative;
+  top: 1px;
+}
+.base-options i {
+  font-size: 21px;
+  color: #999999;
+  margin: 0 10px;
+  cursor: pointer;
+}
+.base-options i:hover {
+  color: #666666;
+}
+</style>

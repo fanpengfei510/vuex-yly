@@ -18,7 +18,7 @@ export default {
     Menu
   },
   created(){
-    if(this.$route.name == "Login"){
+    if(this.$route.name == "Login" || this.$route.name == "LoginUp"){
       this.isShowMenu = false
     }else{
       this.isShowMenu = true
@@ -26,7 +26,7 @@ export default {
   },
   watch : {
     $route(to){
-      if(to.name == "Login"){
+      if(to.name == "Login" || to.name == "LoginUp"){
         this.isShowMenu = false
       }else{
         this.isShowMenu = true

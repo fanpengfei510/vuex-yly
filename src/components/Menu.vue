@@ -12,7 +12,7 @@
         </div>
       </div>
       <div class="header-menu">
-        <div class="app-toggle" @click="handleAppDialog">
+        <div class="app-toggle" @click="bolAppDialog = true">
           <i class="el-icon-menu" style="margin-right:5px;"></i>
           {{objApp.title}}
         </div>
@@ -20,8 +20,8 @@
           <router-link to="/home">
             <li>首页</li>
           </router-link>
-          <router-link :to="item.href" v-for="item in objApp.children" :key="item.id">
-            <li>{{item.label}}</li>
+          <router-link :to="item.href" v-for="item in arrApp[0].children" :key="item.id">
+            <li @click="handleMenuId(item.id)">{{item.label}}</li>
           </router-link>
         </ul>
       </div>
@@ -29,7 +29,7 @@
 
     <el-dialog title="应用选择" :visible.sync="bolAppDialog">
       <el-row :gutter="12">
-        <el-col :span="8" v-for="item in arrMenu" :key="item._id">
+        <el-col :span="8" v-for="item in arrApp" :key="item._id">
           <el-card shadow="hover">
             <a href="javascript:void(0)" @click="handleAppClick(item)">{{item.title}}</a>
           </el-card>
@@ -40,65 +40,33 @@
 </template>
 
 <script>
+import {mapState} from 'vuex';
 export default {
   name: "Menu",
   data() {
     return {
-      arrMenu: [
-        {
-          title: "项目中心",
-          _id: 1,
-          children: [
-            {
-              label: "我的消息",
-              href: "/info",
-              id: "1"
-            },
-            {
-              label: "我的项目",
-              href: "/project/my",
-              id: "2"
-            },
-            {
-              label: "我的任务",
-              href: "/project/task",
-              id: "3"
-            },
-            {
-              label: "我的审批",
-              href: "/project/approve",
-              id: "4"
-            },
-            {
-              label: "项目动态",
-              href: "/project/news",
-              id: "5"
-            },
-            {
-              label: "项目文件",
-              href: "/project/file",
-              id: "6"
-            }
-          ]
-        },
-        { title: "行政案例", _id: 2 }
-      ],
-      objApp: {},
       bolAppDialog: false
     };
   },
+  computed : {
+    ...mapState({
+      arrApp : state => state.menu.arrApp,
+    })
+  },
   methods: {
-    handleAppDialog() {
-      this.bolAppDialog = true;
-    },
     handleAppClick(result) {
       this.$router.push("/home");
-      this.objApp = result;
+      // this.objApp = result;
       this.bolAppDialog = false;
+    },
+    handleMenuId(id){
+      sessionStorage.setItem('menuId',id)
+      this.$store.dispatch('menu/getMenuId',id)
     }
   },
   created() {
-    this.objApp = this.arrMenu[0]
+    this.$store.dispatch('menu/getApp')
+    this.objApp = this.$store.state.menu.arrApp[0]
   }
 };
 </script>

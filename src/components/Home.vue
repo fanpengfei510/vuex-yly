@@ -109,6 +109,7 @@ export default {
     padding: 10px 20px;
   }
   .content-box h3{
+    line-height: 50px;
     font-size: 16px;
     font-weight: 400;
     color: #16325C;

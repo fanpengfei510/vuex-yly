@@ -65,6 +65,22 @@
             end-placeholder="结束日期">
           </el-date-picker>
         </el-form-item>
+        <el-form-item label="选择组员">
+            <el-select
+              v-model="formNewProject.team"
+              multiple
+              filterable
+              allow-create
+              default-first-option
+            >
+              <el-option
+                v-for="item in team"
+                :key="item.id"
+                :value="item.id"
+                :label="item.label"
+              ></el-option>
+            </el-select>
+          </el-form-item>
       </el-form>
       <span slot="footer" class="dialog-footer">
         <el-button type="primary" @click="submitProject" size="small">确 定</el-button>
@@ -85,7 +101,8 @@ export default {
         name : '',
         head : '',
         amount : 0,
-        time : ''
+        time : '',
+        team : []
       },
       search : {
         name : '',
@@ -115,13 +132,23 @@ export default {
           task : 18,
           id:'2'
         }
-      ]
+      ],
+      team : [{
+        id : 1,
+        label : '张三'
+      },{
+        id : 2,
+        label : '李四'
+      }]
     }
+  },
+  created(){
+    this.$store.dispatch('project/getTabs',sessionStorage.getItem('menuId'))
   },
   methods : {
     submitProject(){
       this.bolProjectDialgo = false;
-      console.log(this.formNewProject)
+      this.$store.dispatch('project/addProject',{...this.formNewProject,tabsId:'123'})
     },
     handleSearch(){
       console.log(this.search)

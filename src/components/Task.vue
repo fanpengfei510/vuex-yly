@@ -1,5 +1,6 @@
 <template>
-  <vue-drawer-layout 
+  <div>
+    <vue-drawer-layout 
     ref="drawer" 
     :drawer-width="1200" 
     :reverse="true"
@@ -45,8 +46,79 @@
         </el-table>
       </div>
     </div>
-
-  </vue-drawer-layout>
+    </vue-drawer-layout>
+      <el-dialog
+        title="添加任务"
+        :visible.sync="bolProjectDialgo"
+        width="600px"
+      >
+        <el-form :model="objAddTask" label-width="80px">
+          <el-form-item label="任务类型">
+            <el-select v-model="objAddTask.type">
+              <el-option
+                v-for="item in options"
+                :key="item.value"
+                :label="item.label"
+                :value="item.value"
+              ></el-option>
+            </el-select>
+          </el-form-item>
+          <el-form-item label="任务名称">
+            <el-input placeholder="请输入任务名称" v-model="objAddTask.label"/>
+          </el-form-item>
+          <el-form-item label="所属项目">
+            <el-select v-model="objAddTask.boston">
+              <el-option
+                v-for="item in arrboston"
+                :value="item.value"
+                :key="item.value"
+                :label="item.label"
+              ></el-option>
+            </el-select>
+          </el-form-item>
+          <el-form-item label="创建时间">
+            <el-date-picker
+              v-model="objAddTask.createTime"
+              type="datetime"
+              placeholder="选择日期时间">
+            </el-date-picker>
+          </el-form-item>
+          <el-form-item label="项目经理">
+            <el-select v-model="objAddTask.head">
+              <el-option
+                v-for="item in arrHead"
+                :key="item.value"
+                :value="item.value"
+                :label="item.label"
+              >
+              </el-option>
+            </el-select>
+          </el-form-item>
+          <el-form-item label="赏金">
+            <el-input-number v-model="objAddTask.amount"/>
+          </el-form-item>
+          <el-form-item label="开始时间">
+            <el-date-picker
+              v-model="objAddTask.startTime"
+              type="datetime"
+              placeholder="选择开始时间"
+            ></el-date-picker>
+          </el-form-item>
+          <el-form-item label="结束时间">
+            <el-date-picker
+              v-model="objAddTask.endTime"
+              type="datetime"
+              placeholder="选择结束时间"
+            ></el-date-picker>
+          </el-form-item>
+          
+        </el-form>
+        <span slot="footer" class="dialog-footer">
+          <el-button type="primary" @click="submitProject" size="small">确 定</el-button>
+          <el-button @click="bolProjectDialgo = false" size="small">取 消</el-button>
+        </span>
+      </el-dialog>
+    </div>
 </template>
 
 <script>
@@ -78,8 +150,34 @@ export default {
           state: 1
         }
       ],
-      itemData : {}
-    };
+      itemData : {},
+      bolProjectDialgo : false,
+      objAddTask : {
+        type : '',
+        label : '',
+        boston : '',
+        createTime : '',
+        head : '',
+        amount : '',
+        startTime : '',
+        endTime : '',
+      },
+      options: [{
+        value: '01',
+        label: '其他'
+      }, {
+        value: '02',
+        label: '进行中'
+      }],
+      arrboston : [{
+        value : '01',
+        label : '企业联合协作管理平台前端研发'
+      }],
+      arrHead : [{
+        value : "01",
+        label : "张三"
+      }],
+    }
   },
   methods: {
     handleDetail(item) {
@@ -88,6 +186,10 @@ export default {
     },
     handleMask(){
       this.$refs.drawer.toggle();
+    },
+    submitProject(){
+      this.bolProjectDialgo = false;
+      console.log(this.objAddTask)
     }
   },
 };

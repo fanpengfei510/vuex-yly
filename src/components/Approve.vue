@@ -5,7 +5,7 @@
       <el-button type="primary" size="small">发起审批</el-button>
     </h4>
     <el-tabs v-model="activeName">
-      <el-tab-pane label="未审批" name="01">
+      <el-tab-pane label="审批中" name="01">
         <el-table :data="tableData">
           <el-table-column prop="type" width="200" label="审批类型"></el-table-column>
           <el-table-column prop="name" width="250" label="审批名称"></el-table-column>
@@ -25,12 +25,10 @@
           </el-table-column>
         </el-table>
       </el-tab-pane>
-      <el-tab-pane label="已审批" name="02">已审批</el-tab-pane>
-      <el-tab-pane label="已驳回" name="03">已驳回</el-tab-pane>
-      <el-tab-pane label="审批未通过" name="04">审批未通过</el-tab-pane>
-      <el-tab-pane label="审批已通过" name="05">审批已通过</el-tab-pane>
-      <el-tab-pane label="已删除" name="06">已删除</el-tab-pane>
-      <el-tab-pane label="全部" name="07">全部</el-tab-pane>
+      <el-tab-pane label="审批通过" name="02">审批通过</el-tab-pane>
+      <el-tab-pane label="未通过" name="03">未通过</el-tab-pane>
+      <el-tab-pane label="已删除" name="04">已删除</el-tab-pane>
+      <el-tab-pane label="全部" name="05">全部</el-tab-pane>
     </el-tabs>
   </div>
 </template>

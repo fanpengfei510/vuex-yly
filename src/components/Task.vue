@@ -1,14 +1,14 @@
 <template>
   <div>
     <vue-drawer-layout 
-    ref="drawer" 
-    :drawer-width="1200" 
-    :reverse="true"
-    :backdrop="true"
-    :backdrop-opacity-range="[0,0.001]"
-    @mask-click='handleMask'
-    style="margin-top: 103px;"
-  >
+      ref="drawer" 
+      :drawer-width="1200" 
+      :reverse="true"
+      :backdrop="true"
+      :backdrop-opacity-range="[0,0.001]"
+      @mask-click='handleMask'
+      style="margin-top: 103px;"
+    >
     <div class="drawer" slot="drawer">
       <div class="base-info">
         <h4>基本信息</h4>

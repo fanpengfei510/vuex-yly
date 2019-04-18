@@ -6,7 +6,8 @@ import Home from '@/components/Home';
 import MyProject from '@/components/MyProject';
 import Setting from '@/components/Setting';
 import Task from '@/components/Task';
-import Approve from '@/components/Approve'
+import Approve from '@/components/Approve';
+import User from '@/components/user';
 
 Vue.use(Router)
 
@@ -46,6 +47,11 @@ export default new Router({
       path : '/setting',
       name : 'Setting',
       component: Setting
+    },
+    {
+      path : '/user',
+      name : 'User',
+      component: User
     }
   ]
 })

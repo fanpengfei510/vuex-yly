@@ -9,6 +9,10 @@
           <router-link to="/setting">
             <i class="el-icon-setting"></i>
           </router-link>
+          <div class="user-box">
+            <img src="http://attach.bbs.miui.com/forum/201201/01/011257xkfbj9cfxkumxjfz.png"/>
+            <router-link to="/user">系统管理员</router-link>
+          </div>
         </div>
       </div>
       <div class="header-menu">
@@ -113,6 +117,10 @@ export default {
   position: relative;
   top: 1px;
 }
+.base-options{
+  display: flex;
+  align-items: center;
+}
 .base-options i {
   font-size: 21px;
   color: #999999;
@@ -121,5 +129,18 @@ export default {
 }
 .base-options i:hover {
   color: #666666;
+}
+.user-box{
+  display: flex;
+  margin-left: 20px;
+  align-items: center;
+}
+.user-box img{
+  width: 35px;
+  margin-right: 10px;
+  border: 2px solid #999999;
+  height: 35px;
+  border-radius: 50%;
+
 }
 </style>

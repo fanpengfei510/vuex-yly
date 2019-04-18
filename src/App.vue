@@ -59,4 +59,13 @@ export default {
     padding: 0;
     font-weight: 400;
   }
+  .el-dialog__footer{
+    background: #f5f5f5;
+    border-top: 2px solid #eee;
+    padding: 20px;
+    text-align: center;
+  }
+  .el-dialog__header{
+    border-bottom: 2px solid #eee;
+  }
 </style>

@@ -24,8 +24,8 @@
           <router-link to="/home">
             <li>首页</li>
           </router-link>
-          <router-link :to="item.href" v-for="item in arrApp[0].children" :key="item.id">
-            <li @click="handleMenuId(item.id)">{{item.label}}</li>
+          <router-link :to="item.href" v-for="item in objApp.children" :key="item.id">
+            <li @click="handleMenuId(item)">{{item.title}}</li>
           </router-link>
         </ul>
       </div>
@@ -34,7 +34,7 @@
     <el-dialog title="应用选择" :visible.sync="bolAppDialog">
       <el-row :gutter="12">
         <el-col :span="8" v-for="item in arrApp" :key="item._id">
-          <el-card shadow="hover">
+          <el-card shadow="hover" style="margin-bottom:15px;">
             <a href="javascript:void(0)" @click="handleAppClick(item)">{{item.title}}</a>
           </el-card>
         </el-col>
@@ -49,28 +49,31 @@ export default {
   name: "Menu",
   data() {
     return {
-      bolAppDialog: false
+      bolAppDialog: false,
     };
   },
   computed : {
     ...mapState({
       arrApp : state => state.menu.arrApp,
+      objApp : state => state.menu.objApp
     })
   },
   methods: {
+    // 系统应用切换，并设置当前应用
     handleAppClick(result) {
       this.$router.push("/home");
-      // this.objApp = result;
+      this.$store.dispatch('menu/getObjApp',result)
       this.bolAppDialog = false;
     },
-    handleMenuId(id){
-      sessionStorage.setItem('menuId',id)
-      this.$store.dispatch('menu/getMenuId',id)
+    // 菜单点击事件，并设置menuId
+    handleMenuId(item){
+      window.localStorage.setItem('menuId',item.id)
+      this.$store.dispatch('menu/getMenuId',item.id)
     }
   },
   created() {
+    console.log('1')
     this.$store.dispatch('menu/getApp')
-    this.objApp = this.$store.state.menu.arrApp[0]
   }
 };
 </script>

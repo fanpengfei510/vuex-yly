@@ -29,9 +29,20 @@ export default {
     }
   },
   methods : {
+    // 登陆
     handleLogin(){
       this.$store.dispatch('login/loginIn',this.login).then(data=>{
-        this.$router.push('/home')
+        if(data.data.status == 200){
+          let { token,userId } = data.data;
+          window.localStorage.setItem('token',token)
+          window.localStorage.setItem('userId',userId)
+          this.$router.push('/home')
+        }else{
+          this.$message({
+            message : '账号或者密码错误，请重试!',
+            type : 'error'
+          })
+        }
       })
     }
   }

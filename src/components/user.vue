@@ -52,8 +52,12 @@ export default {
   },
   methods : {
     handleUpload(item){
-      console.log(item)
-      // this.strImg = URL.createObjectURL()
+      var formData = new FormData()
+      formData.append("file" , item.file)
+      this.$server.fileUpload(formData).then(data=>{
+        console.log(data)
+        this.strImg = data.data.upStream.path
+      })
     },
   }
 }

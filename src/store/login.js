@@ -5,10 +5,10 @@ const state = {
 
 const actions = {
   loginIn(context,data){
-    server.userLogin(data).then( data => data )
+    return server.userLogin(data).then( data => data )
   },
   loginUp(context,data){
-    server.userLoginUp(data).then( data => data )
+    return server.userLoginUp(data).then( data => data )
   }
 }
 

@@ -14,6 +14,10 @@ export default {
   getApp(){
     return Get("/api/get/system/applist")
   },
+  // 获取所有用户列表
+  getUserList(){
+    return Get(`/api/get/user`)
+  },
   // 添加菜单
   addMenu(body){
     return Post("/api/menu/addmenu",body)
@@ -29,6 +33,9 @@ export default {
   },
   // 我的项目-添加项目
   addProject(body){
-    return Post('api/post/project/add',body)
+    return Post('/api/post/project/add',body)
+  },
+  fileUpload(body){
+    return Post('/api/post/file/upload',body)
   }
 }

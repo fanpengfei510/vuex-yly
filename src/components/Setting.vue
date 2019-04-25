@@ -5,14 +5,15 @@
         <MenuSetting />
       </el-tab-pane>
       <el-tab-pane label="项目设置">
-        项目设置
+        <Project />
       </el-tab-pane>
     </el-tabs>
   </div>
 </template>
 
 <script>
-import MenuSetting from './setting/menu'
+import MenuSetting from './setting/menu';
+import Project from './setting/project';
 export default {
   name : 'Setting',
   data(){
@@ -21,7 +22,8 @@ export default {
     }
   },
   components:{
-    MenuSetting
+    MenuSetting,
+    Project
   }
 }
 </script>

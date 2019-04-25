@@ -11,10 +11,10 @@ module.exports = {
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
     proxyTable: {
-      // '/': {    
-      //   target: 'http://localhost:3001',  // 接口域名
-      //   changeOrigin: true,  //是否跨域
-      // }
+      '/': {    
+        target: 'http://localhost:3001',  // 接口域名
+        changeOrigin: true,  //是否跨域
+      }
     },
 
     // Various Dev Server settings

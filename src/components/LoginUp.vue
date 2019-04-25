@@ -37,7 +37,15 @@ export default {
   methods : {
     handleLoginUp(){
       this.$store.dispatch('login/loginUp',this.login).then(data=>{
-        this.$router.push('/')
+        console.log(data)
+        if(data.data.status == 200){
+          this.$router.push('/')
+        }else{
+          this.$message({
+            message : data.data.msg,
+            type : 'error'
+          })
+        }
       })
     }
   }

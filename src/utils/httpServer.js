@@ -23,6 +23,7 @@ axios.interceptors.request.use(
     config.headers = {
       'Content-Type': 'application/json',
       'Authorization' : `Bearer ${window.localStorage.getItem('token')}`
+      // 'Authorization' : `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7InVzZXJuYW1lIjoi6ZKf5Lqu5LquIiwicGFzc3dvcmQiOiIxMjM0NTYifSwiaWF0IjoxNTU1NTg5NDUzLCJleHAiOjE1NTU2NzU4NTN9.okWsL4d2g8DjCXm2CmEtyGCD3ULvK5ir7G5mYQ6GJe8`
     }
     // startLoading('加载中...');
     return config;
